@@ -1,0 +1,17 @@
+{
+  "name": "sena-shop",
+  "displayName": "sena-shop",
+  "expo": {
+    "name": "sena-shop",
+    "slug": "sena-shop",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
