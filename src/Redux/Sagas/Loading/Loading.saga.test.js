@@ -7,8 +7,8 @@ import watchAll, { watchResponseAction,
    handlerCommandAction,
    handlerQueryAction,
   matchRegex } from './Loading.saga';
-import { actions } from '../../Reducers/LoadingReducer/Loading.reducer';
-import { actions as appActions } from '../../Reducers/AppReducer/App.reducer';
+import { actions } from '../../Reducers/Loading/Loading.reducer';
+import { actions as appActions } from '../../Reducers/App/App.reducer';
 
 jest.mock('redux-saga/effects', () => ({
   takeLatest: jest.fn(),

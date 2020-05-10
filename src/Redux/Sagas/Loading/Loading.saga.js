@@ -1,7 +1,7 @@
 import { fork, takeLatest, put, all, select } from 'redux-saga/effects';
 
-import { actions } from '../../Reducers/LoadingReducer/Loading.reducer';
-import { actions as appActions } from '../../Reducers/AppReducer/App.reducer';
+import { actions } from '../../Reducers/Loading/Loading.reducer';
+import { actions as appActions } from '../../Reducers/App/App.reducer';
 import selectors from '../../Selectors';
 
 export const matchRegex = regex => action => regex.test(action.type);
