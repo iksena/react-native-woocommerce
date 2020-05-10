@@ -62,3 +62,4 @@ buck-out/
 .expo/*
 
 yarn.lock
+coverage
