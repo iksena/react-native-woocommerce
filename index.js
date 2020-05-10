@@ -1,4 +1,5 @@
-import { registerRootComponent } from 'expo';
+import {registerRootComponent} from 'expo';
+import './shim.js';
 
 import App from './src';
 
