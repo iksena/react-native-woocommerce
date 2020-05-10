@@ -46,6 +46,7 @@
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-react": "^7.19.0",
     "jest-expo": "~37.0.0",
+    "react-test-renderer": "^16.13.1",
     "redux-logger": "^3.0.6",
     "typescript": "~3.8.3"
   },
