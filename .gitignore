@@ -63,3 +63,4 @@ buck-out/
 
 yarn.lock
 coverage
+.env
