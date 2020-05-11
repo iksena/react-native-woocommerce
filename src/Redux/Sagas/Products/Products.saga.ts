@@ -1,7 +1,7 @@
 import {all, call, fork, put, takeLatest} from 'redux-saga/effects';
 
 import WooCommerce from "../../../Services/WooCommerce";
-import {isEmptyArray} from "../../../Utils/Conditions";
+import {isNonEmptyArray} from "../../../Utils/Conditions";
 import {actions, constant} from '../../Reducers/Products/Products.reducer';
 import {actions as appActions} from '../../Reducers/App/App.reducer';
 import {ProductsState} from "../../../Models";
@@ -18,12 +18,12 @@ export function* getProducts({payload}: { payload: ProductsState }) {
     try {
         const products = yield call(callProductsAPI, page);
 
-        if (!isEmptyArray(products)) {
+        if (isNonEmptyArray(products)) {
             yield put(actions.setProducts(products));
             yield put(actions.setProductsPage());
         }
     } catch (error) {
-        // yield error.toString();
+        console.log('error',error)
     } finally {
         yield put(appActions.setRenderable());
     }
