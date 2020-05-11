@@ -11,6 +11,7 @@ export function* handlerCommandAction() {
 }
 
 export function* handlerQueryAction() {
+  yield put(actions.loading());
   const isRenderable = yield select(selectors.app.getRenderableState);
 
   if (isRenderable) {
@@ -38,6 +39,6 @@ export default function* watchAll() {
   yield all([
     fork(watchCommandAction),
     fork(watchQueryAction),
-    fork(watchResponseAction)
+    fork(watchResponseAction),
   ]);
 }

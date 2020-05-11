@@ -7,6 +7,12 @@ const getProducts = createSelector(
   data => data.products || [],
 );
 
+const isRefreshing = createSelector(
+  [getProductsState],
+  data => data.refreshing,
+);
+
 export default {
   getProducts,
+  isRefreshing,
 };

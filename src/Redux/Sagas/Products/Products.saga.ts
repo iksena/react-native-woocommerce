@@ -19,6 +19,7 @@ export function* getProducts({payload}: { payload: ProductsState }) {
         const products = yield call(callProductsAPI, page);
 
         if (isNonEmptyArray(products)) {
+            yield put(actions.productsResponse());
             yield put(actions.setProducts(products));
             yield put(actions.setProductsPage());
         }
