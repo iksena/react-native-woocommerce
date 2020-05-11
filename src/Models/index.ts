@@ -4,6 +4,11 @@ export interface User {
     address: string
 }
 
+export interface Product {
+    id: string,
+    name: string
+}
+
 export interface IReducers {
     [key: string]: any;
 }
@@ -22,7 +27,7 @@ export interface LoadingState {
 }
 
 export interface ProductsState {
-    products: Array<object>,
+    products: Array<Product>,
     refreshing: boolean,
     page: number
 }

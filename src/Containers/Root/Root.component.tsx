@@ -2,10 +2,7 @@ import React from 'react';
 import {Text, View} from 'react-native';
 
 import styles from './Root.component.styles';
-
-interface Props {
-    name: String
-}
+import {Props} from "./Root.container";
 
 const _renderRoot = (name: String) => (
     <Text>Hello, {name}!</Text>
