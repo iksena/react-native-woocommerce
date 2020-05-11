@@ -2,6 +2,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 
+import BrowseContainer from '../Containers/Browse/Browse.container';
 import RootContainer from '../Containers/Root/Root.container';
 import Routes from './Routes';
 
@@ -10,13 +11,13 @@ const Tab = createBottomTabNavigator();
 
 const Home = () => (
   <Tab.Navigator>
-    <Tab.Screen name={Routes.Browse} component={RootContainer}/>
+    <Tab.Screen name={Routes.Browse} component={BrowseContainer}/>
     <Tab.Screen name={Routes.Profile} component={RootContainer}/>
   </Tab.Navigator>
 );
 
 const RootStack = () => (
-  <Stack.Navigator initialRouteName={Routes.Root}>
+  <Stack.Navigator initialRouteName={Routes.Home}>
     <Stack.Screen name={Routes.Root} component={RootContainer}/>
     <Stack.Screen name={Routes.Home} component={Home}/>
   </Stack.Navigator>
