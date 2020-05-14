@@ -6,6 +6,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {persistor, store} from "./Redux";
 import NavigationStacks from "./Navigation/Stacks";
 import Loading from "./Components/Loading/Loading.component";
+import FlashMessage from "react-native-flash-message";
 
 export default function App() {
     return (
@@ -15,6 +16,7 @@ export default function App() {
                 <NavigationContainer>
                     <NavigationStacks/>
                 </NavigationContainer>
+                <FlashMessage position="top" />
             </PersistGate>
         </Provider>
     );
