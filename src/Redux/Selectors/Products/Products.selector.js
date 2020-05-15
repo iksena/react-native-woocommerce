@@ -12,7 +12,13 @@ const isRefreshing = createSelector(
   data => data.refreshing,
 );
 
+const getPage = createSelector(
+  [getProductsState],
+  data => data.page || 1,
+);
+
 export default {
   getProducts,
   isRefreshing,
+  getPage,
 };

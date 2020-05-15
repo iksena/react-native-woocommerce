@@ -4,9 +4,19 @@ export interface User {
     address: string
 }
 
+export interface Image {
+    id: string,
+    src: string,
+    name: string,
+    alt: string
+}
+
 export interface Product {
     id: string,
-    name: string
+    name: string,
+    price: number,
+    images: Array<Image>,
+    description: string
 }
 
 export interface IReducers {

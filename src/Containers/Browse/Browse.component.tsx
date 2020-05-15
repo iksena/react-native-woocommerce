@@ -1,22 +1,37 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {FlatList, Text} from 'react-native';
 
 import styles from './Browse.component.styles';
 import {Product, ProductsState} from "../../Models";
+import {Card} from "react-native-elements";
 
 interface Props extends ProductsState {
+    onRefresh: () => void,
+    onEndReached: () => void
 }
 
-const _renderProducts = (products: Array<Product>) =>
-    products.map((product) => <Text>{product.name}</Text>);
+const _renderProduct = ({item: {name, images, price}}: { item: Product }) => (
+    <Card
+        title={name}
+        image={{uri: images[0].src}}
+    >
+        <Text>{price}</Text>
+    </Card>
+)
 
 const Browse = (props: Props) => {
-    const {products} = props;
+    const {products, refreshing, onRefresh, onEndReached} = props;
 
     return (
-        <View style={styles.container}>
-            {_renderProducts(products)}
-        </View>
+        <FlatList
+            data={products}
+            renderItem={_renderProduct}
+            keyExtractor={item => item.id}
+            refreshing={refreshing}
+            onEndReached={onEndReached}
+            onRefresh={onRefresh}
+            style={styles.container}
+        />
     );
 };
 
