@@ -1,16 +1,16 @@
 import React from 'react';
 import {FlatList, Text} from 'react-native';
+import {Card, Rating} from 'react-native-elements';
 
 import styles from './Browse.component.styles';
-import {Product, ProductsState} from "../../Models";
-import {Card} from "react-native-elements";
+import {Product, ProductsState} from '../../Models';
 
 interface Props extends ProductsState {
     onRefresh: () => void,
     onEndReached: () => void
 }
 
-const _renderProduct = ({item: {name, images: [image], price}}: { item: Product }) => (
+const _renderProduct = ({item: {name, images: [image], price, average_rating: rating}}: { item: Product }) => (
     <Card
         title={name}
         // @ts-ignore
@@ -19,6 +19,11 @@ const _renderProduct = ({item: {name, images: [image], price}}: { item: Product 
         containerStyle={styles.card}
     >
         <Text>{price}</Text>
+        <Rating
+            readonly
+            imageSize={10}
+            startingValue={Number(rating)}
+        />
     </Card>
 )
 

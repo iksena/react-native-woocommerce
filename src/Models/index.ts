@@ -13,7 +13,8 @@ export interface Product {
     name: string,
     price: number,
     images: Array<Image>,
-    description: string
+    description: string,
+    average_rating: string
 }
 
 export interface IReducers {

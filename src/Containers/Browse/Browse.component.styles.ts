@@ -11,11 +11,8 @@ const styles = StyleSheet.create<Styles>({
         alignItems: 'center'
     },
     card: {
-        marginLeft: 5,
-        marginTop: 5,
-        marginBottom: 5,
-        marginRight:10,
-        width: '45%'
+        flex: 0,
+        minWidth: '40%'
     }
 
 })
