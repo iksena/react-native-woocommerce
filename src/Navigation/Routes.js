@@ -4,4 +4,6 @@ export default {
   Auth: 'Auth',
   Browse: 'Browse',
   Profile: 'Profile',
+  Shop: 'Shop',
+  Product: 'Detail',
 };

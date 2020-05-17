@@ -11,7 +11,7 @@ const styles = StyleSheet.create<Styles>({
     },
     card: {
         flex: 0,
-        maxWidth: '40%'
+        maxWidth: 180
     }
 
 })
