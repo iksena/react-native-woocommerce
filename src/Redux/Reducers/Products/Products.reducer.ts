@@ -1,7 +1,7 @@
 import typeToReducer from 'type-to-reducer';
 import {createAction} from 'redux-actions';
 
-import {ProductsState, IReducers} from "../../../Models";
+import {IReducers, ProductsState} from "../../../Models";
 
 const SET_PRODUCTS: string = 'SET_PRODUCTS';
 const SET_PRODUCTS_REFRESHING: string = 'SET_PRODUCTS_REFRESHING';
@@ -58,6 +58,7 @@ const resetProductsStateHandler = (state: ProductsState, {payload}: { payload: P
 
 const setProductsHandler = (state: ProductsState, {payload: products}: { payload: ProductsState }) => ({
     ...state,
+// @ts-ignore
     products: state.products.concat(products)
 });
 

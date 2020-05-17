@@ -1,18 +1,15 @@
 export interface User {
-    id: string,
+    id: number,
     name: string,
     address: string
 }
 
 export interface Image {
-    id: string,
     src: string,
-    name: string,
-    alt: string
 }
 
 export interface Product {
-    id: string,
+    id: number,
     name: string,
     price: number,
     images: Array<Image>,

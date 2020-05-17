@@ -10,10 +10,13 @@ interface Props extends ProductsState {
     onEndReached: () => void
 }
 
-const _renderProduct = ({item: {name, images, price}}: { item: Product }) => (
+const _renderProduct = ({item: {name, images: [image], price}}: { item: Product }) => (
     <Card
         title={name}
-        image={{uri: images[0].src}}
+        // @ts-ignore
+        titleNumberOfLines={2}
+        image={{uri: image.src}}
+        containerStyle={styles.card}
     >
         <Text>{price}</Text>
     </Card>
@@ -24,13 +27,14 @@ const Browse = (props: Props) => {
 
     return (
         <FlatList
+            contentContainerStyle={styles.container}
             data={products}
             renderItem={_renderProduct}
-            keyExtractor={item => item.id}
+            keyExtractor={(item) => `${item.id}`}
             refreshing={refreshing}
             onEndReached={onEndReached}
             onRefresh={onRefresh}
-            style={styles.container}
+            numColumns={2}
         />
     );
 };
