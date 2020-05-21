@@ -11,7 +11,7 @@ const _getProductById = (products: Array<Product>, id: number) =>
 
 const ProductContainer = (props: ProductsState) => {
     const products = useSelector(selectors.products.getProducts);
-    const [imagesShown, showImages] = useState(true);
+    const [imagesShown, showImages] = useState(false);
     const route = useRoute();
     const handlers = {
         handleShowImages: () => showImages(prevState => !prevState)
