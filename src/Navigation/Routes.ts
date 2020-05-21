@@ -5,5 +5,5 @@ export default {
   Browse: 'Browse',
   Profile: 'Profile',
   Shop: 'Shop',
-  Product: 'Detail',
+  Product: 'Detail'
 };

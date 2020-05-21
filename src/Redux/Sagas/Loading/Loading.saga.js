@@ -4,7 +4,7 @@ import { actions } from '../../Reducers/Loading/Loading.reducer';
 import { actions as appActions } from '../../Reducers/App/App.reducer';
 import selectors from '../../Selectors';
 
-export const matchRegex = regex => action => regex.test(action.type);
+export const matchRegex = (regex) => (action) => regex.test(action.type);
 
 export function* handlerCommandAction() {
   yield put(actions.loading());

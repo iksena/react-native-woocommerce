@@ -1,3 +1,3 @@
 export default {
-    APP_NAME: 'SenaShop'
-}
+  APP_NAME: 'SenaShop'
+};
