@@ -6,6 +6,7 @@ import HTML from 'react-native-render-html';
 
 import styles from './Browse.component.styles';
 import { Product, ProductsState } from '../../Models';
+import { toAmount } from '../../Utils';
 
 interface Props extends ProductsState {
     onRefresh: () => void;
@@ -37,6 +38,7 @@ const _renderProduct = (handlePress: (id: number) => void) =>
           imageSize={10}
           startingValue={Number(rating)}
         />
+        <Text>{toAmount(price)}</Text>
         <HTML
           html={description}
           textSelectable
@@ -45,7 +47,6 @@ const _renderProduct = (handlePress: (id: number) => void) =>
               <Text numberOfLines={2}>{children}</Text>
           }}
         />
-        <Text>{price}</Text>
       </Card>
     </TouchableOpacity>
   );
