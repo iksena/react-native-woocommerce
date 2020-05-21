@@ -1,11 +1,11 @@
 import { takeLatest, put, all } from 'redux-saga/effects';
 
 import watchAll, { watchResponseAction,
-   watchCommandAction,
-   watchQueryAction,
-   handlerResponseAction,
-   handlerCommandAction,
-   handlerQueryAction,
+  watchCommandAction,
+  watchQueryAction,
+  handlerResponseAction,
+  handlerCommandAction,
+  handlerQueryAction,
   matchRegex } from './Loading.saga';
 import { actions } from '../../Reducers/Loading/Loading.reducer';
 import { actions as appActions } from '../../Reducers/App/App.reducer';
@@ -74,9 +74,18 @@ describe('Loading Saga', () => {
   });
 
   describe('#handlerQueryAction', () => {
+    it('should call put with loading action', () => {
+      const watcher = handlerQueryAction();
+
+      watcher.next();
+
+      expect(put).toBeCalledWith(actions.loading());
+    });
+
     it('should call put with reset renderable action if state renderable', () => {
       const watcher = handlerQueryAction();
 
+      watcher.next();
       watcher.next();
       watcher.next(true);
 
@@ -87,9 +96,10 @@ describe('Loading Saga', () => {
       const watcher = handlerQueryAction();
 
       watcher.next();
+      watcher.next();
       watcher.next(false);
 
-      expect(put).not.toBeCalled();
+      expect(put).not.toBeCalledWith(appActions.resetRenderable());
     });
   });
 

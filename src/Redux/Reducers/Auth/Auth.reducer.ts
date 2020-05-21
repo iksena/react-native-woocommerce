@@ -33,10 +33,10 @@ export const actions = {
 const setUserHandler = (
     state: AuthState,
     { payload }: { payload: AuthState }
-): AuthState => ({
+) => ({
   ...state,
   user: {
-    ...payload.user
+    ...payload
   }
 });
 

@@ -23,5 +23,6 @@ rules: {
   'comma-dangle': off,
   'object-curly-spacing': ['error', 'always'],
   '@typescript-eslint/ban-ts-ignore': off,
-  'react/display-name': off
+  'react/display-name': off,
+  'max-len': ['error', { 'code': 100 }]
 }
