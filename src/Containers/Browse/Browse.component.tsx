@@ -1,12 +1,9 @@
 import React from 'react';
-import { FlatList, Text, TouchableOpacity } from 'react-native';
-import { Card, Rating } from 'react-native-elements';
-// @ts-ignore
-import HTML from 'react-native-render-html';
+import { FlatList } from 'react-native';
 
 import styles from './Browse.component.styles';
 import { Product, ProductsState } from '../../Models';
-import { toAmount } from '../../Utils';
+import ProductItem from '../../Components/ProductItem/ProductItem.component';
 
 interface Props extends ProductsState {
     onRefresh: () => void;
@@ -15,41 +12,8 @@ interface Props extends ProductsState {
 }
 
 const _renderProduct = (handlePress: (id: number) => void) =>
-  ({
-    item: {
-      id,
-      name,
-      images: [image],
-      price,
-      average_rating: rating,
-      description
-    }
-  }: { item: Product }): JSX.Element => (
-    <TouchableOpacity onPress={(): void => handlePress(id)}>
-      <Card
-        title={name}
-        // @ts-ignore
-        titleNumberOfLines={2}
-        image={{ uri: image.src }}
-        containerStyle={styles.card}
-      >
-        <Rating
-          readonly
-          imageSize={10}
-          startingValue={Number(rating)}
-        />
-        <Text>{toAmount(price)}</Text>
-        <HTML
-          html={description}
-          textSelectable
-          renderers={{
-            p: (_: any, children: React.ReactNode) =>
-              <Text numberOfLines={2}>{children}</Text>
-          }}
-        />
-      </Card>
-    </TouchableOpacity>
-  );
+  ({ item }: { item: Product }): JSX.Element =>
+    <ProductItem handlePress={handlePress} product={item}/>;
 
 const Browse = (props: Props): JSX.Element => {
   const {
