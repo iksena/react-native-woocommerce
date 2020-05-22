@@ -21,7 +21,7 @@ interface Props {
 
 const _renderCartDetail = (props: Props): JSX.Element => (
   <>
-    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+    <View style={styles.quantityView}>
       <Icon
         name='minus'
         type='font-awesome-5'
@@ -35,7 +35,7 @@ const _renderCartDetail = (props: Props): JSX.Element => (
       />
     </View>
     <Button
-      title="Remove from cart"
+      title="Remove"
       onPress={(): void => props.removeFromCart(props.product.id)}
     />
   </>

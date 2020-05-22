@@ -1,10 +1,11 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 
 import styles from './Cart.component.styles';
 import { CartItem, CartState, Product } from '../../Models';
 import ProductItem from '../../Components/ProductItem/ProductItem.component';
+import { toAmount } from '../../Utils';
 
 interface Props extends CartState {
     handleProductPress: (id: number) => void;
@@ -28,11 +29,13 @@ const _renderProduct = (props: Props) =>
 const Browse = (props: Props): JSX.Element => {
   const {
     products,
-    resetCart
+    resetCart,
+    total
   } = props;
 
   return (
     <>
+      <Text>{toAmount(total)}</Text>
       <Button
         title="Clear cart"
         onPress={(): void => resetCart()}
