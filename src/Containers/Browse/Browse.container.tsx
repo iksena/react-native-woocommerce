@@ -4,9 +4,10 @@ import { useNavigation } from '@react-navigation/native';
 import { Action } from 'redux';
 
 import { actions } from '../../Redux/Reducers/Products/Products.reducer';
+import { actions as cartActions } from '../../Redux/Reducers/Cart/Cart.reducer';
 import selectors from '../../Redux/Selectors';
 import Browse from './Browse.component';
-import { ProductsState } from '../../Models';
+import { Product, ProductsState } from '../../Models';
 import Routes from '../../Navigation/Routes';
 
 const BrowseContainer = (props: ProductsState): JSX.Element => {
@@ -19,8 +20,11 @@ const BrowseContainer = (props: ProductsState): JSX.Element => {
   const handlers = {
     onRefresh: (): Action => dispatch(actions.refetchProducts({ page })),
     onEndReached: (): Action => dispatch(actions.productsEndReached({ page })),
-    handleProductPress: (id: number): void =>
-      navigation.navigate(Routes.Product, { id })
+    handleProductPress: (id: number): void => navigation.navigate(Routes.Product, { id }),
+    addToCart: (product: Product): Action => dispatch(cartActions.addToCart(product)),
+    removeFromCart: (productId: number): Action => dispatch(cartActions.removeFromCart(productId)),
+    addQuantity: (productId: number): Action => dispatch(cartActions.addQuantity(productId)),
+    subQuantity: (productId: number): Action => dispatch(cartActions.subQuantity(productId))
   };
 
   useEffect(() => {

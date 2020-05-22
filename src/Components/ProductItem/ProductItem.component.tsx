@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
-import { Card, Rating } from 'react-native-elements';
+import { Card, Rating, Button } from 'react-native-elements';
 // @ts-ignore
 import HTML from 'react-native-render-html';
 
@@ -10,21 +10,33 @@ import { toAmount } from '../../Utils';
 
 interface Props {
     product: Product;
-    handlePress: (id: number) => void;
+    handleProductPress: (id: number) => void;
+    isInCart?: boolean;
+    addToCart: (product: Product) => void;
+    removeFromCart: (id: number) => void;
+    addQuantity: (id: number) => void;
+    subQuantity: (id: number) => void;
 }
 
 const ProductItem = (props: Props): JSX.Element => {
   const {
-    id,
-    name,
-    images: [image],
-    price,
-    average_rating: rating,
-    description
-  } = props.product;
+    product: {
+      id,
+      name,
+      images: [image],
+      price,
+      average_rating: rating,
+      description
+    },
+    handleProductPress,
+    addToCart,
+    removeFromCart,
+    isInCart = false
+  } = props;
+
 
   return (
-    <TouchableOpacity onPress={(): void => props.handlePress(id)}>
+    <TouchableOpacity onPress={(): void => handleProductPress(id)}>
       <Card
         title={name}
         // @ts-ignore
@@ -45,6 +57,10 @@ const ProductItem = (props: Props): JSX.Element => {
             p: (_: any, children: React.ReactNode): JSX.Element =>
               <Text numberOfLines={2}>{children}</Text>
           }}
+        />
+        <Button
+          title={isInCart ? 'Remove from cart' : 'Add to cart'}
+          onPress={(): void => isInCart ? removeFromCart(id) : addToCart(props.product)}
         />
       </Card>
     </TouchableOpacity>

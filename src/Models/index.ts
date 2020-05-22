@@ -18,6 +18,10 @@ export interface Product {
     average_rating: string;
 }
 
+export interface CartItem extends Product{
+    quantity: number;
+}
+
 export interface Reducers {
     [key: string]: any;
 }
@@ -38,4 +42,8 @@ export interface ProductsState {
     products: Array<Product>;
     refreshing: boolean;
     page: number;
+}
+export interface CartState {
+    products: Array<CartItem>;
+    total: number;
 }
