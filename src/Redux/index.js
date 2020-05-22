@@ -10,7 +10,7 @@ import rootSaga from './Sagas';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['auth']
+  whitelist: ['auth', 'cart']
 };
 
 // support debugging using react-native-debugger app

@@ -1,7 +1,7 @@
 import typeToReducer from 'type-to-reducer';
 import { createAction } from 'redux-actions';
 
-import { Reducers, ProductsState } from '../../../Models';
+import {Reducers, ProductsState, Product} from '../../../Models';
 
 const SET_PRODUCTS = 'SET_PRODUCTS';
 const SET_PRODUCTS_REFRESHING = 'SET_PRODUCTS_REFRESHING';
@@ -61,10 +61,9 @@ const resetProductsStateHandler = (
 
 const setProductsHandler = (
     state: ProductsState,
-    { payload: products }: { payload: ProductsState }
+    { payload: products }: { payload: Array<Product> }
 ): ProductsState => ({
   ...state,
-  // @ts-ignore
   products: [...state.products, ...products]
 });
 
@@ -75,8 +74,8 @@ const setPageHandler = (state: ProductsState): ProductsState => ({
 
 const setRefreshingHandler = (
     state: ProductsState,
-    { payload: refreshing }: { payload: ProductsState }
-) => ({
+    { payload: refreshing }: { payload: boolean }
+): ProductsState => ({
   ...state,
   refreshing
 });
