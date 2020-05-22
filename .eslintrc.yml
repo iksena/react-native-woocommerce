@@ -25,5 +25,5 @@ rules: {
   '@typescript-eslint/ban-ts-ignore': off,
   'react/display-name': off,
   'max-len': ['error', { 'code': 100 }],
-  'arrow-body-style': ['error', 'never']
+  'arrow-body-style': ['warn', 'as-needed']
 }
