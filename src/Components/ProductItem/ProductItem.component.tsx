@@ -1,6 +1,6 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
-import { Card, Rating, Button } from 'react-native-elements';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { Card, Rating, Icon, Button } from 'react-native-elements';
 // @ts-ignore
 import HTML from 'react-native-render-html';
 
@@ -19,21 +19,60 @@ interface Props {
     quantity?: number;
 }
 
+const _renderCartDetail = (props: Props): JSX.Element => (
+  <>
+    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+      <Icon
+        name='minus'
+        type='font-awesome-5'
+        onPress={(): void => props.subQuantity(props.product.id)}
+      />
+      <Text>Quantity: {props.quantity}</Text>
+      <Icon
+        name='plus'
+        type='font-awesome-5'
+        onPress={(): void => props.addQuantity(props.product.id)}
+      />
+    </View>
+    <Button
+      title="Remove from cart"
+      onPress={(): void => props.removeFromCart(props.product.id)}
+    />
+  </>
+);
+
+const _renderBrowseDetail = (props: Props): JSX.Element => (
+  <>
+    <Rating
+      readonly
+      imageSize={10}
+      startingValue={Number(props.product.average_rating)}
+    />
+    <HTML
+      html={props.product.description}
+      textSelectable
+      renderers={{
+        p: (_: any, children: React.ReactNode): JSX.Element =>
+          <Text numberOfLines={2}>{children}</Text>
+      }}
+    />
+    <Button
+      title="Add to cart"
+      onPress={(): void => props.addToCart(props.product)}
+    />
+  </>
+);
+
 const ProductItem = (props: Props): JSX.Element => {
   const {
     product: {
       id,
       name,
       images: [image],
-      price,
-      average_rating: rating,
-      description
+      price
     },
     handleProductPress,
-    addToCart,
-    removeFromCart,
-    isInCart = false,
-    quantity = 0
+    isInCart = false
   } = props;
 
 
@@ -46,25 +85,11 @@ const ProductItem = (props: Props): JSX.Element => {
         image={{ uri: image.src }}
         containerStyle={styles.card}
       >
-        <Rating
-          readonly
-          imageSize={10}
-          startingValue={Number(rating)}
-        />
         <Text>{toAmount(price)}</Text>
-        <HTML
-          html={description}
-          textSelectable
-          renderers={{
-            p: (_: any, children: React.ReactNode): JSX.Element =>
-              <Text numberOfLines={2}>{children}</Text>
-          }}
-        />
-        {isInCart && <Text>Quantity: {quantity}</Text>}
-        <Button
-          title={isInCart ? 'Remove from cart' : 'Add to cart'}
-          onPress={(): void => isInCart ? removeFromCart(id) : addToCart(props.product)}
-        />
+        {isInCart ?
+            _renderCartDetail(props) :
+            _renderBrowseDetail(props)
+        }
       </Card>
     </TouchableOpacity>
   );
