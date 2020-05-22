@@ -3,7 +3,8 @@ export default {
   Home: 'Home',
   Auth: 'Auth',
   Browse: 'Browse',
-  Profile: 'Profile',
+  Orders: 'Orders',
+  Cart: 'Cart',
   Shop: 'Shop',
   Product: 'Detail'
 };

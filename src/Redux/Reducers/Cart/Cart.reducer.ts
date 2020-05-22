@@ -39,19 +39,28 @@ export const actions = {
 const _findProductById = (state: CartState, productId: number): CartItem =>
   state.products.find((item) => item.id === productId) as CartItem;
 
+const _updateProduct = (products: Array<CartItem>, product: CartItem): Array<CartItem> =>
+  products.map((item) => {
+    if (item.id === product.id) {
+      return product;
+    }
+
+    return item;
+  });
+
 const _mapAddQuantityState = (state: CartState, existingProduct: CartItem): CartState => ({
   ...state,
-  products: [...state.products, {
+  products: _updateProduct(state.products, {
     ...existingProduct,
     quantity: existingProduct.quantity + 1
-  }],
-  total: state.total + existingProduct.price
+  }),
+  total: state.total + Number(existingProduct.price)
 });
 
 const _mapRemoveFromCartState = (state: CartState, existingProduct: CartItem): CartState => ({
   ...state,
-  products: state.products.filter((item) => item.id === existingProduct.id),
-  total: state.total - (existingProduct.price * existingProduct.quantity)
+  products: state.products.filter((item) => item.id !== existingProduct.id),
+  total: state.total - (Number(existingProduct.price) * existingProduct.quantity)
 });
 
 const addQuantityHandler = (
@@ -83,7 +92,7 @@ const addToCartHandler = (
       ...product,
       quantity: 1
     }],
-    total: state.total + product.price
+    total: state.total + Number(product.price)
   };
 };
 
@@ -113,11 +122,11 @@ const subQuantityHandler = (
 
     return {
       ...state,
-      products: [...state.products, {
+      products: _updateProduct(state.products, {
         ...existingProduct,
         quantity: existingProduct.quantity - 1
-      }],
-      total: state.total - existingProduct.price
+      }),
+      total: state.total - Number(existingProduct.price)
     };
   }
 

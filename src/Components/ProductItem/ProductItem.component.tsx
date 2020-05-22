@@ -16,6 +16,7 @@ interface Props {
     removeFromCart: (id: number) => void;
     addQuantity: (id: number) => void;
     subQuantity: (id: number) => void;
+    quantity?: number;
 }
 
 const ProductItem = (props: Props): JSX.Element => {
@@ -31,7 +32,8 @@ const ProductItem = (props: Props): JSX.Element => {
     handleProductPress,
     addToCart,
     removeFromCart,
-    isInCart = false
+    isInCart = false,
+    quantity = 0
   } = props;
 
 
@@ -58,6 +60,7 @@ const ProductItem = (props: Props): JSX.Element => {
               <Text numberOfLines={2}>{children}</Text>
           }}
         />
+        {isInCart && <Text>Quantity: {quantity}</Text>}
         <Button
           title={isInCart ? 'Remove from cart' : 'Add to cart'}
           onPress={(): void => isInCart ? removeFromCart(id) : addToCart(props.product)}
