@@ -1,19 +1,22 @@
 import { StyleSheet, ViewStyle } from 'react-native';
 
 interface Styles {
-    card: ViewStyle;
     quantityView: ViewStyle;
+    browseView: ViewStyle;
+    rating: ViewStyle;
 }
 
 const styles = StyleSheet.create<Styles>({
-  card: {
-    flex: 0,
-    maxWidth: 180
-  },
   quantityView: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between'
+  },
+  browseView: {
+    marginVertical: 5
+  },
+  rating: {
+    paddingVertical: 5
   }
 });
 

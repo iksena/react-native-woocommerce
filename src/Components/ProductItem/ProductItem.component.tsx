@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View, Dimensions } from 'react-native';
 import { Card, Rating, Icon, Button } from 'react-native-elements';
 // @ts-ignore
 import HTML from 'react-native-render-html';
@@ -19,47 +19,70 @@ interface Props {
     quantity?: number;
 }
 
-const _renderCartDetail = (props: Props): JSX.Element => (
+const { width: screenWidth } = Dimensions.get('window');
+
+const _renderCartDetail = ({
+  product,
+  quantity = 0,
+  subQuantity,
+  addQuantity,
+  removeFromCart
+}: Props): JSX.Element => (
   <>
     <View style={styles.quantityView}>
       <Icon
         name='minus'
         type='font-awesome-5'
-        onPress={(): void => props.subQuantity(props.product.id)}
+        onPress={(): void => subQuantity(product.id)}
       />
-      <Text>Quantity: {props.quantity}</Text>
+      <Text>Quantity: {quantity}</Text>
       <Icon
         name='plus'
         type='font-awesome-5'
-        onPress={(): void => props.addQuantity(props.product.id)}
+        onPress={(): void => addQuantity(product.id)}
       />
     </View>
     <Button
       title="Remove"
-      onPress={(): void => props.removeFromCart(props.product.id)}
+      onPress={(): void => removeFromCart(product.id)}
     />
   </>
 );
 
-const _renderBrowseDetail = (props: Props): JSX.Element => (
+
+const _renderBrowseDetail = ({ product, addToCart }: Props): JSX.Element => (
   <>
-    <Rating
-      readonly
-      imageSize={10}
-      startingValue={Number(props.product.average_rating)}
-    />
     <HTML
-      html={props.product.description}
+      html={product.description}
       textSelectable
       renderers={{
-        p: (_: any, children: React.ReactNode): JSX.Element =>
+        p: (_: never, children: Array<string>): JSX.Element =>
           <Text numberOfLines={2}>{children}</Text>
       }}
     />
-    <Button
-      title="Add to cart"
-      onPress={(): void => props.addToCart(props.product)}
-    />
+    <View style={[styles.quantityView, styles.browseView]}>
+      <Rating
+        readonly
+        imageSize={16}
+        startingValue={Number(product.average_rating)}
+        // @ts-ignore
+        style={styles.rating}
+      />
+      <Button
+        icon={{
+          name: 'cart-plus',
+          type: 'font-awesome-5',
+          color: 'white',
+          size: 16
+        }}
+        onPress={(): void => addToCart(product)}
+      />
+      {/* <Icon*/}
+      {/*  name='cart-plus'*/}
+      {/*  type='font-awesome-5'*/}
+      {/*  onPress={(): void => addToCart(product)}*/}
+      {/* />*/}
+    </View>
   </>
 );
 
@@ -83,7 +106,7 @@ const ProductItem = (props: Props): JSX.Element => {
         // @ts-ignore
         titleNumberOfLines={2}
         image={{ uri: image.src }}
-        containerStyle={styles.card}
+        containerStyle={{ width: screenWidth / 2 - 20, margin: 10 }}
       >
         <Text>{toAmount(price)}</Text>
         {isInCart ?

@@ -7,16 +7,19 @@ import { persistor, store } from './Redux';
 import NavigationStacks from './Navigation/Stacks';
 import Loading from './Components/Loading/Loading.component';
 import FlashMessage from 'react-native-flash-message';
+import { SafeAreaView } from 'react-native';
 
 export default function App(): JSX.Element {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <Loading />
-        <NavigationContainer>
-          <NavigationStacks/>
-        </NavigationContainer>
-        <FlashMessage position="top" />
+        <SafeAreaView style={{ flex: 1 }}>
+          <Loading />
+          <NavigationContainer>
+            <NavigationStacks/>
+          </NavigationContainer>
+          <FlashMessage position="top" />
+        </SafeAreaView>
       </PersistGate>
     </Provider>
   );
