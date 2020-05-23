@@ -21,7 +21,11 @@ const BrowseContainer = (props: ProductsState): JSX.Element => {
     onRefresh: (): Action => dispatch(actions.refetchProducts({ page })),
     onEndReached: (): Action => dispatch(actions.productsEndReached({ page })),
     handleProductPress: (id: number): void => navigation.navigate(Routes.Product, { id }),
-    addToCart: (product: Product): Action => dispatch(cartActions.addToCart(product)),
+    addToCart: (product: Product): Action => {
+      navigation.navigate(Routes.Orders, { screen: Routes.Cart });
+
+      return dispatch(cartActions.addToCart(product));
+    },
     removeFromCart: (productId: number): Action => dispatch(cartActions.removeFromCart(productId)),
     addQuantity: (productId: number): Action => dispatch(cartActions.addQuantity(productId)),
     subQuantity: (productId: number): Action => dispatch(cartActions.subQuantity(productId))
