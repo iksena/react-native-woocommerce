@@ -29,7 +29,7 @@ const _renderCartDetail = ({
   removeFromCart
 }: Props): JSX.Element => (
   <>
-    <View style={styles.quantityView}>
+    <View style={styles.actionView}>
       <Icon
         name='minus'
         type='font-awesome-5'
@@ -60,7 +60,7 @@ const _renderBrowseDetail = ({ product, addToCart }: Props): JSX.Element => (
           <Text numberOfLines={2}>{children}</Text>
       }}
     />
-    <View style={[styles.quantityView, styles.browseView]}>
+    <View style={styles.actionView}>
       <Rating
         readonly
         imageSize={16}

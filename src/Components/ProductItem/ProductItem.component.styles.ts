@@ -1,18 +1,15 @@
 import { StyleSheet, ViewStyle } from 'react-native';
 
 interface Styles {
-    quantityView: ViewStyle;
-    browseView: ViewStyle;
+    actionView: ViewStyle;
     rating: ViewStyle;
 }
 
 const styles = StyleSheet.create<Styles>({
-  quantityView: {
+  actionView: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between'
-  },
-  browseView: {
+    justifyContent: 'space-between',
     marginVertical: 5
   },
   rating: {
