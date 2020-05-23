@@ -1,6 +1,6 @@
 import React from 'react';
-import { FlatList, Text } from 'react-native';
-import { Button } from 'react-native-elements';
+import { FlatList, Text, View } from 'react-native';
+import { Button, Icon } from 'react-native-elements';
 
 import styles from './Cart.component.styles';
 import { CartItem, CartState, Product } from '../../Models';
@@ -14,7 +14,6 @@ interface Props extends CartState {
     addQuantity: (id: number) => void;
     subQuantity: (id: number) => void;
     resetCart: () => void;
-    total: number;
 }
 
 const _renderProduct = (props: Props) =>
@@ -35,11 +34,18 @@ const Browse = (props: Props): JSX.Element => {
 
   return (
     <>
-      <Text>{toAmount(total)}</Text>
-      <Button
-        title="Clear cart"
-        onPress={(): void => resetCart()}
-      />
+      <View style={styles.cartOverview}>
+        <View style={styles.leftCartOverview}>
+          <Icon
+            reverse
+            name="trash-alt"
+            type="font-awesome-5"
+            onPress={(): void => resetCart()}
+          />
+          <Text style={styles.textTotal}>{`Total:\n${toAmount(total)}`}</Text>
+        </View>
+        <Button title="Checkout"/>
+      </View>
       <FlatList
         contentContainerStyle={styles.container}
         data={products}
