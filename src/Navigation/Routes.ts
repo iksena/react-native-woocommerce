@@ -4,7 +4,8 @@ export default {
   Auth: 'Auth',
   Browse: 'Browse',
   Orders: 'Orders',
-  Cart: 'Cart',
   Shop: 'Shop',
-  Product: 'Detail'
+  Product: 'Detail',
+  Cart: 'Cart',
+  Checkout: 'Checkout',
 };

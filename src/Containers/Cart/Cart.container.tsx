@@ -17,6 +17,7 @@ const CartContainer = (props: CartState): JSX.Element => {
 
   const handlers = {
     handleProductPress: (id: number): void => navigation.navigate(Routes.Product, { id }),
+    handleCheckoutPress: (): void => navigation.navigate(Routes.Checkout),
     addToCart: (product: Product): Action => dispatch(actions.addToCart(product)),
     removeFromCart: (productId: number): Action => dispatch(actions.removeFromCart(productId)),
     addQuantity: (productId: number): Action => dispatch(actions.addQuantity(productId)),

@@ -9,6 +9,7 @@ import { toAmount } from '../../Utils';
 
 interface Props extends CartState {
     handleProductPress: (id: number) => void;
+    handleCheckoutPress: () => void;
     addToCart: (product: Product) => void;
     removeFromCart: (id: number) => void;
     addQuantity: (id: number) => void;
@@ -29,7 +30,8 @@ const Browse = (props: Props): JSX.Element => {
   const {
     products,
     resetCart,
-    total
+    total,
+    handleCheckoutPress
   } = props;
 
   return (
@@ -44,7 +46,10 @@ const Browse = (props: Props): JSX.Element => {
           />
           <Text style={styles.textTotal}>{`Total:\n${toAmount(total)}`}</Text>
         </View>
-        <Button title="Checkout"/>
+        <Button
+          title="Checkout"
+          onPress={(): void => handleCheckoutPress()}
+        />
       </View>
       <FlatList
         contentContainerStyle={styles.container}
