@@ -7,6 +7,7 @@ import BrowseContainer from '../Containers/Browse/Browse.container';
 import ProductContainer from '../Containers/Product/Product.container';
 import RootContainer from '../Containers/Root/Root.container';
 import CartContainer from '../Containers/Cart/Cart.container';
+import { Icon } from 'react-native-elements';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -24,8 +25,22 @@ const Orders = (): JSX.Element => (
   </Stack.Navigator>
 );
 
+const tabIcons = {
+  [Routes.Browse]: 'shopping-bag',
+  [Routes.Orders]: 'shopping-cart'
+};
+
 const Home = (): JSX.Element => (
-  <Tab.Navigator>
+  <Tab.Navigator
+    screenOptions={({ route }): object => ({
+      tabBarIcon: ({ color, size }: { color: string; size: number}): JSX.Element =>
+        <Icon
+          name={tabIcons[route.name]}
+          type="font-awesome-5"
+          size={size}
+          color={color}
+        />
+    })}>
     <Tab.Screen name={Routes.Browse} component={Browse}/>
     <Tab.Screen name={Routes.Orders} component={Orders}/>
   </Tab.Navigator>
