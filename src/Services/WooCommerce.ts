@@ -1,46 +1,44 @@
-import axios from 'axios';
-import oauth from 'oauth-1.0a';
+import axios, { AxiosResponse } from 'axios';
+import OAuth from 'oauth-1.0a';
 import CryptoJS from 'crypto-js';
 
 import config from '../Config';
 
-const wcBaseURL = config.WC_BASE_URL;
+const wcBaseUrl = config.WC_BASE_URL;
+const wcApiUrl = config.WC_API_URL;
 
-// @ts-ignore
-const getOauth = () => oauth({
+const _getOAuth = (): OAuth => new OAuth({
   consumer: {
     key: config.WC_CONSUMER_KEY,
     secret: config.WC_CONSUMER_SECRET
   },
   signature_method: 'HMAC-SHA1',
-  hash_function: (baseString: string, key: string) => {
-    return CryptoJS.enc.Base64.stringify(CryptoJS.HmacSHA1(baseString, key));
-  }
+  hash_function: (baseString: string, key: string) =>
+    CryptoJS.enc.Base64.stringify(CryptoJS.HmacSHA1(baseString, key))
 });
 
-const get = async (path: string): Promise<object> => {
+const get = async (path: string): Promise<AxiosResponse> => {
   const request = {
-    url: `${wcBaseURL}${path}`,
+    url: `${wcBaseUrl}${wcApiUrl}${path}`,
     method: 'GET'
   };
-  const oauth = getOauth().authorize(request);
+  const oauth = _getOAuth().authorize(request);
 
   return axios.get(request.url, { params: oauth });
 };
 
-const post = async (path: string, body: object): Promise<object> =>
-  axios.post(`${wcBaseURL}${path}`, body);
+const post = async (path: string, body: object): Promise<AxiosResponse> => {
+  const request = {
+    url: `${wcBaseUrl}${wcApiUrl}${path}`,
+    method: 'POST'
+  };
+  const oauth = _getOAuth().authorize(request);
 
-const put = async (path: string, requestBody: object): Promise<object> =>
-  axios.put(`${wcBaseURL}${path}`, requestBody);
-
-const remove = async (path: string, requestBody: object): Promise<object> =>
-  axios.delete(`${wcBaseURL}${path}`, { data: requestBody });
+  return axios.post(request.url, body, { params: oauth });
+};
 
 
 export default {
   get,
-  put,
-  remove,
   post
 };
