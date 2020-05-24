@@ -1,7 +1,7 @@
 import typeToReducer from 'type-to-reducer';
 import { createAction } from 'redux-actions';
 
-import {Reducers, ProductsState, Product} from '../../../Models';
+import { Reducers, ProductsState, Product } from '../../../Models';
 
 const SET_PRODUCTS = 'SET_PRODUCTS';
 const SET_PRODUCTS_REFRESHING = 'SET_PRODUCTS_REFRESHING';

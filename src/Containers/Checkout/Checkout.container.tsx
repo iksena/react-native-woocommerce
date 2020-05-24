@@ -1,19 +1,18 @@
 import React from 'react';
-import { Linking } from 'react-native';
-import { useSelector } from 'react-redux';
+import { Action } from 'redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import selectors from '../../Redux/Selectors';
 import Checkout from './Checkout.component';
 import { CartItem, CartState } from '../../Models';
-import WooCommerce from '../../Services/WooCommerce';
-import config from '../../Config';
-import { handleError } from '../../Utils';
+import { actions } from '../../Redux/Reducers/Checkout/Chekout.reducer';
 
 const CheckoutContainer = (props: CartState): JSX.Element => {
   const products = useSelector(selectors.cart.getProducts);
   const total = useSelector(selectors.cart.getTotal);
+  const dispatch = useDispatch();
 
-  const handleCheckoutSubmit = async (userInfo: object) => {
+  const handleCheckoutSubmit = (userInfo: object): Action => {
     const order = {
       billing: userInfo,
       shipping: userInfo,
@@ -23,14 +22,7 @@ const CheckoutContainer = (props: CartState): JSX.Element => {
       }))
     };
 
-    try {
-      const { data: { id, order_key } } = await WooCommerce.post('/orders', order);
-      return Linking.openURL(
-          `${config.WC_BASE_URL}/checkout/order-pay/${id}?pay_for_order=true&key=${order_key}`
-      );
-    } catch (error) {
-      return handleError(error);
-    }
+    return dispatch(actions.checkoutCommand(order));
   };
 
   return (
