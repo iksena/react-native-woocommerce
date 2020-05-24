@@ -41,7 +41,7 @@
     "react-native-reanimated": "~1.7.0",
     "react-native-render-html": "^4.2.0",
     "react-native-responsive-screen": "^1.4.1",
-    "react-native-safe-area-context": "^1.0.0",
+    "react-native-safe-area-context": "^2.0.0",
     "react-native-screens": "~2.2.0",
     "react-native-snap-carousel": "^3.9.0",
     "react-native-tcp": "^3.3.2",
